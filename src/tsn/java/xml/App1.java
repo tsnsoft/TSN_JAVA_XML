@@ -6,11 +6,11 @@ import java.io.FileOutputStream;
 import java.util.Date;
 import java.util.Properties;
 
-public class App1 {  // РАБОТА С XML-ФАЙЛАМИ
+public class App1 {  // Р РђР‘РћРўРђ РЎ XML-Р¤РђР™Р›РђРњР
 
     public static void main(String[] args) {
         try {
-            // Инициализация данных
+            // РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РґР°РЅРЅС‹С…
             String FileName = new File(".").getAbsoluteFile().getParentFile().getAbsolutePath()
                     + System.getProperty("file.separator") + "tsn_data.xml";
             Properties p = new Properties(); // 
@@ -21,11 +21,11 @@ public class App1 {  // РАБОТА С XML-ФАЙЛАМИ
                 p.loadFromXML(new FileInputStream(FileName));
             }
 
-            // Вывод данных о задании на экран
+            // Р’С‹РІРѕРґ РґР°РЅРЅС‹С… Рѕ Р·Р°РґР°РЅРёРё РЅР° СЌРєСЂР°РЅ
             System.out.println("Laboratory work");
             System.out.println("Task: MAX <> MIN");
 
-            // Создание исходных данных (элементов массива) и вывод их на экран
+            // РЎРѕР·РґР°РЅРёРµ РёСЃС…РѕРґРЅС‹С… РґР°РЅРЅС‹С… (СЌР»РµРјРµРЅС‚РѕРІ РјР°СЃСЃРёРІР°) Рё РІС‹РІРѕРґ РёС… РЅР° СЌРєСЂР°РЅ
             final int r = 4;
             final int c = 5;
             int m[][] = new int[r][c];
@@ -40,7 +40,7 @@ public class App1 {  // РАБОТА С XML-ФАЙЛАМИ
                 System.out.println("");
             }
 
-            // Реализация алгоритма варианта задания 
+            // Р РµР°Р»РёР·Р°С†РёСЏ Р°Р»РіРѕСЂРёС‚РјР° РІР°СЂРёР°РЅС‚Р° Р·Р°РґР°РЅРёСЏ 
             int min = m[0][0], max = m[0][0], maxi = 0, maxj = 0, mini = 0, minj = 0;
             for (int i = 0; i < r; i++) {
                 for (int j = 0; j < c; j++) {
@@ -61,7 +61,7 @@ public class App1 {  // РАБОТА С XML-ФАЙЛАМИ
             m[maxi][maxj] = m[mini][minj];
             m[mini][minj] = k;
 
-            // Сохранение обработанных данных массива в XML-файл
+            // РЎРѕС…СЂР°РЅРµРЅРёРµ РѕР±СЂР°Р±РѕС‚Р°РЅРЅС‹С… РґР°РЅРЅС‹С… РјР°СЃСЃРёРІР° РІ XML-С„Р°Р№Р»
             for (int i = 0; i < r; i++) {
                 for (int j = 0; j < c; j++) {
                     p.put("m" + i + j, String.valueOf(m[i][j]));
@@ -69,7 +69,7 @@ public class App1 {  // РАБОТА С XML-ФАЙЛАМИ
             }
             p.storeToXML(new FileOutputStream(FileName), new Date().toString());
 
-            // Считывание данных итогового массива из XML-файла
+            // РЎС‡РёС‚С‹РІР°РЅРёРµ РґР°РЅРЅС‹С… РёС‚РѕРіРѕРІРѕРіРѕ РјР°СЃСЃРёРІР° РёР· XML-С„Р°Р№Р»Р°
             System.out.println("New matrix:");
             for (int i = 0; i < r; i++) {
                 for (int j = 0; j < c; j++) {
@@ -80,7 +80,7 @@ public class App1 {  // РАБОТА С XML-ФАЙЛАМИ
             }
 
         } catch (Exception e) {
-            System.err.println("Error working with XML-file!"); // Вывести сообщение об ошибке            
+            System.err.println("Error working with XML-file!"); // Р’С‹РІРµСЃС‚Рё СЃРѕРѕР±С‰РµРЅРёРµ РѕР± РѕС€РёР±РєРµ            
         }
     }
 }
