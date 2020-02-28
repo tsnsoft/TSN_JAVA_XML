@@ -10,15 +10,16 @@ public class App1 {  // РАБОТА С XML-ФАЙЛАМИ
 
     public static void main(String[] args) {
         try {
-            // Инициализация данных
+            // Определяем текущий каталог с именем файла
             String FileName = new File(".").getAbsoluteFile().getParentFile().getAbsolutePath()
                     + System.getProperty("file.separator") + "tsn_data.xml";
-            Properties p = new Properties(); // 
-            File f = new File(FileName);
-            if (f.exists() == false) {
-                f.createNewFile();
+            Properties p = new Properties(); // Переменная для хранения xml-данных
+            File f = new File(FileName); // Переменная для доступа к файлам
+            if (f.exists() == false) { // Если файл не существует, то
+                f.createNewFile(); // Создаем пустой файл для дальнейшего сохранения в него данных xml
             } else {
-                p.loadFromXML(new FileInputStream(FileName));
+                // Загружаем xml-данные из файла в переменную p для сохранения существующих значений
+                p.loadFromXML(new FileInputStream(FileName)); 
             }
 
             // Вывод данных о задании на экран
@@ -26,10 +27,7 @@ public class App1 {  // РАБОТА С XML-ФАЙЛАМИ
             System.out.println("Task: MAX <> MIN");
 
             // Создание исходных данных (элементов массива) и вывод их на экран
-            final int r = 4;
-            final int c = 5;
-            int m[][] = new int[r][c];
-            int k;
+            final int r = 4; final int c = 5; int m[][] = new int[r][c]; int k;
             System.out.println("Matrix:");
             for (int i = 0; i < r; i++) {
                 for (int j = 0; j < c; j++) {
@@ -45,35 +43,27 @@ public class App1 {  // РАБОТА С XML-ФАЙЛАМИ
             for (int i = 0; i < r; i++) {
                 for (int j = 0; j < c; j++) {
                     k = m[i][j];
-                    if (k > max) {
-                        max = k;
-                        maxi = i;
-                        maxj = j;
-                    }
-                    if (k < min) {
-                        min = k;
-                        mini = i;
-                        minj = j;
-                    }
+                    if (k > max) { max = k; maxi = i; maxj = j; }
+                    if (k < min) { min = k; mini = i; minj = j; }
                 }
             }
-            k = m[maxi][maxj];
-            m[maxi][maxj] = m[mini][minj];
-            m[mini][minj] = k;
+            k = m[maxi][maxj]; m[maxi][maxj] = m[mini][minj]; m[mini][minj] = k;
 
-            // Сохранение обработанных данных массива в XML-файл
+            // Сохраняем данные итогового массива в XML-файл
             for (int i = 0; i < r; i++) {
                 for (int j = 0; j < c; j++) {
+                    // Сохраняем данные в переменную, хранящую данные xml
                     p.put("m" + i + j, String.valueOf(m[i][j]));
                 }
             }
+
+            // Сохранение обработанных данных массива в XML-файл
             p.storeToXML(new FileOutputStream(FileName), new Date().toString());
 
-            // Считывание данных итогового массива из XML-файла
+            // Считывание данных из XML-файла
             System.out.println("New matrix:");
             for (int i = 0; i < r; i++) {
                 for (int j = 0; j < c; j++) {
-                    p.put("m" + i + j, String.valueOf(m[i][j]));
                     System.out.print(p.getProperty("m" + i + j, "?") + " ");
                 }
                 System.out.println("");
